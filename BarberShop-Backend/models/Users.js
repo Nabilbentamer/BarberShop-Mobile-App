@@ -6,7 +6,7 @@ const UserShema = new mongoose.Schema({
   password: { type: String, required: true },
   userType: {
     type: String,
-    enum: ["user", "admin", "barberShop"],
+    enum: ["user", "admin", "barberShop", "barber"],
     default: "user",
   },
 });

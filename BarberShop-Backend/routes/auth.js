@@ -53,6 +53,7 @@ router.post("/register", validateRegister, async (req, res) => {
     password: HashedPassword,
   });
 
+  const token = generateToken(user);
   const savedUser = user.save();
   res.send({
     success: true,
@@ -60,7 +61,9 @@ router.post("/register", validateRegister, async (req, res) => {
       id: savedUser._id,
       fullName: savedUser.name,
       email: savedUser.email,
+      userType: savedUser.userType,
     },
+    token,
   });
 });
 
