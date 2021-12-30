@@ -5,12 +5,18 @@ const app = express();
 app.use(express.json());
 
 const AuthRoutes = require("./routes/auth.js");
+const OwnerRoutes = require("./routes/BarberShopOwner.js");
+const BarberRoutes = require("./routes/Barber.js");
+const BarberShopRoutes = require("./routes/BarberShop.js");
 
 app.get("/", (req, res) => {
   res.send("Welcome to home page");
 });
 
 app.use("/api", AuthRoutes);
+app.use("/api", OwnerRoutes);
+app.use("/api", BarberRoutes);
+app.use("/api", BarberShopRoutes);
 
 mongoose
   .connect(

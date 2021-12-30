@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Shema = new mongoose.Shema();
 
-const BarberShopShema = new Shema({
+const Schema = mongoose.Schema;
+const BarberShopShema = new Schema({
   name: {
     type: String,
     required: true,
@@ -25,22 +25,26 @@ const BarberShopShema = new Shema({
       type: [Number],
       index: "2dsphere",
     },
-    formattedAddress: String,
   },
   photoUrl: {
     type: String,
   },
 
   barberOwner: {
-    type: mongoose.Schema.type.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "barberShopOwner",
   },
   barbers: [
     {
-      type: Shema.type.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Barber",
     },
   ],
+
+  average_review: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const barberShop = mongoose.model("barbershop", BarberShopShema);

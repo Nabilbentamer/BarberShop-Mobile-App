@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Schema = new mongoose.Schema();
+
+const Schema = mongoose.Schema;
 
 const BarberSchema = new Schema({
   name: {
@@ -16,12 +17,16 @@ const BarberSchema = new Schema({
   },
   services: [
     {
-      service_id: Object.ID,
       service_name: String,
       service_price: Number,
       service_duration: Number,
     },
   ],
+  barberShop: {
+    type: Schema.Types.ObjectId,
+    ref: "barbershop",
+    required: true,
+  },
 });
 
 const Barber = mongoose.model("Barber", BarberSchema);
