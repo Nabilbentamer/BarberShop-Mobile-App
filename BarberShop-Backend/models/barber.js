@@ -29,6 +29,6 @@ const BarberSchema = new Schema({
   },
 });
 
-const Barber = mongoose.model("Barber", BarberSchema);
+const Barber = mongoose.model("barber", BarberSchema);
 
 module.exports = Barber;

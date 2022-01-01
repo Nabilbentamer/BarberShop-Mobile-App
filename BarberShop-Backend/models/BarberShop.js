@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
+
 const BarberShopShema = new Schema({
   name: {
     type: String,
@@ -32,15 +32,14 @@ const BarberShopShema = new Schema({
 
   barberOwner: {
     type: Schema.Types.ObjectId,
-    ref: "barberShopOwner",
+    ref: "barbershopowner",
   },
   barbers: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Barber",
+      ref: "barber",
     },
   ],
-
   average_review: {
     type: Number,
     default: 0,

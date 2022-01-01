@@ -2,24 +2,36 @@ const Router = require("express");
 const router = Router();
 
 const Barber = require("../models/barber.js");
+const BarberShop = require("../models/BarberShop.js");
 
-router.post("/AddBarber", (req, res) => {
-  const { name, email, password, services } = req.body;
+router.post("/AddBarber", async (req, res) => {
+  const { name, email, password, services, barberShop } = req.body;
 
   const barber = new Barber({
     name: name,
     email: email,
     password: password,
+    barberShop: barberShop,
     services: services,
   });
 
-  const savedBarber = barber.save();
-
-  res.status(200).send({ message: "BarberShopBarber created with success" });
+  const populatedBarberShop = new BarberShop({
+    barbers: barber,
+  });
+  const savedBarber = await barber.save(function (error) {
+    const ourBarbershop = BarberShop.findOne({ _id: barberShop }).exec(
+      function (erro, barbershps) {
+        barbershps.barbers.push(barber._id);
+        barbershps.save();
+        res.send(barbershps);
+      }
+    );
+  });
 });
 
 router.get("/allBarbers", async (req, res) => {
   Barber.find()
+    //.populate("barberShop")
     .then((All_Barbers) => {
       res.send(All_Barbers);
     })

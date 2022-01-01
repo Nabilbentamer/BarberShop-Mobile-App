@@ -17,7 +17,7 @@ const BarberShopOwnerSchema = new Schema({
 });
 
 const BarberShopOwner = mongoose.model(
-  "BarberShopOwner",
+  "barbershopowner",
   BarberShopOwnerSchema
 );
 

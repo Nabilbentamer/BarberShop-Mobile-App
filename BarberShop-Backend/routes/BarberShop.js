@@ -1,14 +1,31 @@
 const Router = require("express");
-const BarberShop = require("../models/BarberShop.js");
-
 const router = Router();
 
-router.get("/allBarberShop", async (req, res) => {
+const BarberShop = require("../models/BarberShop");
+const barberOwner = require("../models/BarberShopOwner");
+
+router.get("/allBarberShop", (req, res, next) => {
   BarberShop.find()
-    .then((All_Barbers) => {
-      res.send(All_Barbers);
+    .exec()
+    .then((docs) => {
+      res.status(200).json({
+        count: docs.length,
+        mydocs: docs.map((doc) => {
+          return {
+            _id: doc._id,
+            name: doc.name,
+            barbers: doc.barbers,
+            address: doc.address,
+            barberOwner: doc.barberOwner,
+          };
+        }),
+      });
     })
-    .catch((error) => console.log(error));
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
 });
 
 router.post("/AddBarberShop", async (req, res) => {
@@ -31,4 +48,13 @@ router.post("/AddBarberShop", async (req, res) => {
     }
   });
 });
+
+router.delete("/BarberShops", (req, res) => {
+  BarberShop.deleteMany()
+    .then((Barbershop) => {
+      res.send(Barbershop);
+    })
+    .catch((err) => console.log(err));
+});
+
 module.exports = router;
