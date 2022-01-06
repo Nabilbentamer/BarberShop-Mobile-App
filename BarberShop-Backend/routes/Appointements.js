@@ -57,11 +57,28 @@ router.get("/AllAppointements/:Barber_id", async (req, res) => {
 
 router.get("/Appointements/Slots/:Barber_id/:Client_id", async (req, res) => {
   const schedule = ["8.00", "9.00", "10.00", "11.00", "12.00"];
+
   Appointement.find({
     barber_id: req.params.Barber_id,
     client_id: req.params.Client_id,
   })
-    .then((app) => res.send(app))
+    .then((app) => {
+      const ourapp = app.map(findtime);
+      var free_Schedule = [];
+      function findtime(item) {
+        const starTime = item.startTime;
+        const endTime = item.endTime;
+        free_Schedule = schedule.filter(delete_busy);
+        function delete_busy(item) {
+          if ((starTime != item) & (endTime != item)) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+        res.send(free_Schedule);
+      }
+    })
     .catch((error) => console.log(error));
   const free_Slots = [];
 });

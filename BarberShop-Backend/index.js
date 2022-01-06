@@ -10,6 +10,8 @@ const BarberRoutes = require("./routes/Barber.js");
 const BarberShopRoutes = require("./routes/BarberShop.js");
 const Services = require("./routes/Services.js");
 const Appointements = require("./routes/Appointements.js");
+const CheckAvailability = require("./routes/CheckAvailability.js");
+
 app.get("/", (req, res) => {
   res.send("Welcome to home page");
 });
@@ -20,6 +22,7 @@ app.use("/api", BarberRoutes);
 app.use("/api", BarberShopRoutes);
 app.use("/api", Services);
 app.use("/api", Appointements);
+app.use("/api", CheckAvailability);
 
 mongoose
   .connect(
