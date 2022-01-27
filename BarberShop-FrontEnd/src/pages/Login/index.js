@@ -1,10 +1,12 @@
-import { View } from "native-base";
-import { React } from "react";
+import React from "react";
+import { View, Text } from "react-native";
 
-export default () => {
+const login = () => {
   return (
     <View>
-      <Text>Hey test</Text>
+      <Text>This is Login Page</Text>
     </View>
   );
 };
+
+export default login;

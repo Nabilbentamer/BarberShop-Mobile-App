@@ -1,10 +1,10 @@
 import { View } from "native-base";
-import { React } from "react";
+import React from "react";
 
 const Signup = () => {
   return (
     <View>
-      <Text>Hey test</Text>
+      <Text>This is Signup Page</Text>
     </View>
   );
 };
