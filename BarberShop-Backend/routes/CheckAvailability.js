@@ -3,12 +3,11 @@ const router = Router();
 
 const Appointement = require("../models/Appointement.js");
 
-router.get("/CheckAvailability/:Barber_id/:Client_id", async (req, res) => {
+router.get("/CheckAvailability/:Barber_id", async (req, res) => {
   const schedule = ["08.00", "09.00", "10.00", "11.00", "12.00"];
   var time_Slots = [];
   Appointement.find({
     barber_id: req.params.Barber_id,
-    client_id: req.params.Client_id,
   })
     .then((app) => {
       function findtime(item) {
