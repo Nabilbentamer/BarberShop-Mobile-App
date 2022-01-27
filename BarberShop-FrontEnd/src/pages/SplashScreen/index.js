@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Text, View, Image } from "react-native";
 
 import * as S from "./style";
+
 export default () => {
   const navigation = useNavigation();
   return (
