@@ -3,10 +3,15 @@ import MainStack from "./src/stack/MainStack";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 
+import store from "./src/redux/store";
+import { Provider } from "react-redux";
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <MainStack />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <MainStack />
+      </NavigationContainer>
+    </Provider>
   );
 }

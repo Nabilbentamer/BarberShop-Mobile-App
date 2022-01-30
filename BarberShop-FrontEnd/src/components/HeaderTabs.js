@@ -5,13 +5,25 @@ import { Icon } from "react-native-elements";
 
 import styled from "styled-components";
 
-export default function Headertabs() {
+export default function Headertabs(props) {
   return (
     <View>
       <MainTitle> Choose a barberShop</MainTitle>
       <Container>
-        <HeaderButton text="nearby" icon="map-marker" icontype="font-awesome" />
-        <HeaderButton text="random" icon="random" icontype="font-awesome" />
+        <HeaderButton
+          activeTab={props.activeTab}
+          setActiveTab={props.setActiveTab}
+          text="nearby"
+          icon="map-marker"
+          icontype="font-awesome"
+        />
+        <HeaderButton
+          text="random"
+          icon="random"
+          icontype="font-awesome"
+          activeTab={props.activeTab} // initial state is:  nearby
+          setActiveTab={props.setActiveTab} // iniat state : ""
+        />
       </Container>
     </View>
   );
@@ -28,21 +40,10 @@ const Container = styled.View`
   margin-left: 20px;
 `;
 
-const styles = StyleSheet.create({
-  Area: {
-    flex: 1,
-    paddingTop: Platform.OS === "android" ? 35 : 0,
-  },
-  icon: {
-    marginLeft: 8,
-    alignItems: "center",
-  },
-});
-
 const HeaderButton = (props) => (
   <TouchableOpacity
     style={{
-      backgroundColor: "black",
+      backgroundColor: props.activeTab === props.text ? "black" : "white",
       paddingVertical: 4,
       paddingHorizontal: 16,
       borderRadius: 30,
@@ -50,10 +51,11 @@ const HeaderButton = (props) => (
       marginRight: 5,
       alignItems: "center",
     }}
+    onPress={() => props.setActiveTab(props.text)}
   >
     <Text
       style={{
-        color: "white",
+        color: props.activeTab === props.text ? "white" : "black",
         fontSize: 18,
         fontWeight: "900",
       }}
@@ -64,8 +66,8 @@ const HeaderButton = (props) => (
       name={props.icon}
       type={props.icontype}
       size={15}
-      style={styles.icon}
-      color="white"
+      style={{ marginLeft: 8, alignItems: "center" }}
+      color={props.activeTab === props.text ? "white" : "black"}
     ></Icon>
   </TouchableOpacity>
 );
