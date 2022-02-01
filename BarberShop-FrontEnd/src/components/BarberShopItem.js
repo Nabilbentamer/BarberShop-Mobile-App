@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const localRestaurants = [
+const localBarbershops = [
   {
     name: "Beachside Bar",
     image_url:
@@ -34,63 +34,71 @@ const localRestaurants = [
 export default () => {
   return (
     <>
-      <TouchableOpacity>
-        <View style={{ marginTop: 10, padding: 20, backgroundColor: "white" }}>
-          <Image
-            source={{
-              uri: "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
-            }}
-            style={{ width: "100%", height: 180 }}
-          />
-          <TouchableOpacity
-            style={{ position: "absolute", right: 30, top: 25 }}
-          >
-            <MaterialCommunityIcons
-              name="heart-outline"
-              size={26}
-              backgroundColor="white"
-            ></MaterialCommunityIcons>
-          </TouchableOpacity>
+      {localBarbershops.map((barbershop, index) => (
+        <TouchableOpacity activeOpacity={1} key={index}>
           <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: 10,
-            }}
+            style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
           >
-            <View>
-              <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-                BarberShop name
-              </Text>
-              <Text style={{ fontSize: 13, color: "gray" }}>25-35 min</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: "#eee",
-                borderRadius: 15,
-                width: 30,
-                height: 30,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text>4.2</Text>
-            </View>
+            <BarberShopImage image={barbershop.image_url} />
+            <BarberShopInfo
+              BarberShopname={barbershop.name}
+              rating={barbershop.rating}
+            />
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      ))}
+    </>
+  );
+};
 
-      <TouchableOpacity>
-        <View style={{ marginTop: 10, padding: 20, backgroundColor: "white" }}>
-          <Image
-            source={{
-              uri: "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
-            }}
-            style={{ width: "100%", height: 180 }}
-          />
-        </View>
+const BarberShopImage = (props) => {
+  return (
+    <>
+      <Image
+        source={{
+          uri: props.image,
+        }}
+        style={{ width: "100%", height: 180 }}
+      />
+      <TouchableOpacity style={{ position: "absolute", right: 30, top: 25 }}>
+        <MaterialCommunityIcons
+          name="heart-outline"
+          size={26}
+          backgroundColor="white"
+        ></MaterialCommunityIcons>
       </TouchableOpacity>
     </>
+  );
+};
+
+const BarberShopInfo = (props) => {
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginTop: 10,
+      }}
+    >
+      <View>
+        <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+          {props.BarberShopname}
+        </Text>
+        <Text style={{ fontSize: 13, color: "gray" }}>25-35 min</Text>
+      </View>
+      <View
+        style={{
+          backgroundColor: "#eee",
+          borderRadius: 15,
+          width: 30,
+          height: 30,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Text>{props.rating}</Text>
+      </View>
+    </View>
   );
 };
