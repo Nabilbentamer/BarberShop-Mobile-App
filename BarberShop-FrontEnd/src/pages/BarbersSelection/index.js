@@ -15,7 +15,7 @@ import Reviews from "../../components/BarberShopDetails/Reviews";
 
 export default () => {
   return (
-    <SafeAreaView style={{ padding: 18 }}>
+    <SafeAreaView style={{ padding: 18, backgroundColor: "white" }}>
       <StatusBar
         hidden={true}
         barStyle="dark-content"
@@ -31,6 +31,7 @@ export default () => {
           flexWrap: "wrap",
           padding: 5,
           marginTop: 15,
+          backgroundColor: "white",
         }}
       >
         <TouchableOpacity style={styles.barberContainer}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "react-native-elements";
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, StatusBar } from "react-native";
 import { Searchbar } from "react-native-paper";
 
 import * as S from "./style";
@@ -9,6 +9,7 @@ export default () => {
   const [searchQuery, setSearchQuery] = useState("");
   return (
     <S.Container>
+      <StatusBar hidden={true}></StatusBar>
       <S.MapIcon>
         <Icon
           name="map-marker"

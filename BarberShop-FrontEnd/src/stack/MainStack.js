@@ -9,12 +9,13 @@ import Main from "../pages/Main/index";
 import BarberShopList from "../pages/BarberShopList";
 import BarberShopDetails from "../pages/BarberShopDetails";
 import BarbersSelection from "../pages/BarbersSelection";
+import BarberProfile from "../pages/BarberProfile";
 const Stack = createStackNavigator();
 
 const MainStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="BarbersSelection"
+      initialRouteName="BarberProfile"
       screenOptions={{
         headerShown: false,
       }}
@@ -26,6 +27,7 @@ const MainStack = () => {
       <Stack.Screen name="BarberShopList" component={BarberShopList} />
       <Stack.Screen name="BarberShopDetails" component={BarberShopDetails} />
       <Stack.Screen name="BarbersSelection" component={BarbersSelection} />
+      <Stack.Screen name="BarberProfile" component={BarberProfile} />
     </Stack.Navigator>
   );
 };
