@@ -16,6 +16,7 @@ export const MainTitle = styled.Text`
 export const subTitle = styled.Text`
   font-size: 15px;
   padding-right: 20px;
+  font-family: "sans-serif-medium";
 `;
 
 export const LocationButton = styled.TouchableOpacity`

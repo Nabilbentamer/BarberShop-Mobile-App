@@ -11,7 +11,8 @@ export const Container = styled.View`
 export const Title = styled.Text`
   color: black;
   font-size: 16px;
-  margin: 64px 8px 24px;
+  margin: 38px 8px 40px 24px;
+  font-family: "sans-serif-medium";
 `;
 
 export const SignupButton = styled.TouchableOpacity`

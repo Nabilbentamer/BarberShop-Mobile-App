@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, StatusBar } from "react-native";
 
 import * as S from "./style";
 
@@ -8,6 +8,11 @@ export default () => {
   const navigation = useNavigation();
   return (
     <S.Container>
+      <StatusBar
+        hidden={true}
+        barStyle="dark-content"
+        backgroundColor="white"
+      ></StatusBar>
       <Image source={require("../../assets/barberShop-logo.jpeg")}></Image>
       <View>
         <S.Title>Find the best BarberShop At Your door Step</S.Title>

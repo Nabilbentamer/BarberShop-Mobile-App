@@ -1,7 +1,9 @@
-import React from "react";
-import { Alert, TextInput, View, Text } from "react-native";
+import React, { useState } from "react";
+import { Alert, TextInput, View, Text, TouchableOpacity } from "react-native";
 
 import Input from "../../components/Input";
+import CheckBox from "react-native-check-box";
+import { Icon } from "react-native-elements";
 
 import * as S from "./style";
 
@@ -17,6 +19,8 @@ const formSchema = yup.object({
 });
 
 const Login = () => {
+  const [checked, setChecked] = useState(false);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -43,7 +47,7 @@ const Login = () => {
         <S.Container>
           <S.MainTitle>Welcome</S.MainTitle>
           <S.MainTitle>Back</S.MainTitle>
-
+          <S.UserImage source={require("../../assets/user_haircut.jpg")} />
           <S.SubTitle>Sign in to Continue</S.SubTitle>
 
           <S.InputArea>
@@ -56,6 +60,7 @@ const Login = () => {
             />
             <Text>{props.touched.email && props.errors.email}</Text>
             <Input
+              secureTextEntry={true}
               placeholder="Enter your password"
               IconName="lock"
               value={props.values.password}
@@ -66,8 +71,22 @@ const Login = () => {
           </S.InputArea>
 
           <S.textContainer>
-            <Text>Remember me</Text>
-            <Text>Forgot Password ? </Text>
+            <CheckBox
+              onClick={() => {
+                setChecked(!checked);
+              }}
+              isChecked={checked}
+            ></CheckBox>
+            <Text style={{ marginLeft: -50 }}>Remember me</Text>
+            <Text
+              style={{
+                textDecorationLine: "underline",
+                textDecorationStyle: "solid",
+                textDecorationColor: "#000",
+              }}
+            >
+              Forgot Password ?{" "}
+            </Text>
           </S.textContainer>
 
           <S.SigninButton
@@ -79,11 +98,19 @@ const Login = () => {
           </S.SigninButton>
 
           <S.SignFbButton onPress={() => navigation.navigate("SplashScreen")}>
+            <Icon name="facebook" style={{ marginRight: 8 }}></Icon>
             <S.SignFbText>Sign in With Facebook </S.SignFbText>
           </S.SignFbButton>
 
-          <View>
-            <Text>Don't Have an Account ? Sign up </Text>
+          <View style={{ marginTop: 10, marginLeft: 4, flexDirection: "row" }}>
+            <Text>Don't Have an Account ? </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Signup");
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Sign up</Text>
+            </TouchableOpacity>
           </View>
         </S.Container>
       )}

@@ -11,6 +11,15 @@ export const MainTitle = styled.Text`
   font-weight: bold;
 `;
 
+export const UserImage = styled.Image`
+  width: 90px;
+  height: 90px;
+  border-radius: 40px;
+  position: absolute;
+  right: 20px;
+  top: 20%;
+`;
+
 export const SubTitle = styled.Text`
   font-size: 16px;
   color: gray;
@@ -42,11 +51,13 @@ export const SignInText = styled.Text`
 
 export const SignFbButton = styled.TouchableOpacity`
   background: white;
-  padding: 10px 20px;
+  padding: 8px 10px;
   border: 1px solid black;
   border-radius: 15px;
   align-items: center;
   margin-top: 15px;
+  flex-direction: row;
+  justify-content: center;
 `;
 
 export const SignFbText = styled.Text`

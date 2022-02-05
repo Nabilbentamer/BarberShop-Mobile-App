@@ -14,11 +14,19 @@ const InputArea = styled.View`
   align-items: center;
 `;
 
-export default ({ IconName, placeholder, value, onChangeText, onBlur }) => {
+export default ({
+  IconName,
+  placeholder,
+  value,
+  onChangeText,
+  onBlur,
+  secureTextEntry,
+}) => {
   return (
     <InputArea>
-      <Icon name={IconName} />
+      <Icon style={{ marginRight: 5 }} name={IconName} />
       <TextInput
+        secureTextEntry={secureTextEntry}
         placeholder={placeholder}
         placeholderTextColor="white"
         value={value}
