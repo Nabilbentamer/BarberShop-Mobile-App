@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Headertabs from "../../components/HeaderTabs";
 import SearchBar from "../../components/SearchBar";
 import BarberShopItem from "../../components/BarberShopItem";
+import BottomTabs from "../../components/BottomTabs";
 import {
   View,
   StyleSheet,
@@ -9,7 +10,7 @@ import {
   StatusBar,
   ScrollView,
 } from "react-native";
-export default () => {
+export default ({ navigation }) => {
   const [activeTab, setActiveTab] = useState("nearby");
   return (
     <SafeAreaView style={styles.Area}>
@@ -25,8 +26,9 @@ export default () => {
       <ScrollView
         style={{ paddingRight: 10, paddingTop: 10, backgroundColor: "#eee" }}
       >
-        <BarberShopItem />
+        <BarberShopItem navigation={navigation} />
       </ScrollView>
+      <BottomTabs navigation={navigation} />
     </SafeAreaView>
   );
 };

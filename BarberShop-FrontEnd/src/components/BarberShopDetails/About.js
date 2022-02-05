@@ -1,11 +1,17 @@
 import React from "react";
 import { Image, View, Text, SafeAreaView, StyleSheet } from "react-native";
 
-export default function about() {
+export default function about(props) {
+  const { name, image, addresse, review, rating } = props.route.params;
   return (
     <View>
-      <BarberShopImage />
-      <BarberShopInfo />
+      <BarberShopImage image={image} />
+      <BarberShopInfo
+        name={name}
+        addresse={addresse}
+        rating={rating}
+        review={review}
+      />
       <View
         style={{
           flexDirection: "row",
@@ -21,16 +27,7 @@ export default function about() {
   );
 }
 
-const barber = {
-  title: "Lasagna",
-  description: "With butter lettuce, tomato and sauce bechamel",
-  price: "$13.50",
-  image:
-    "https://townsquare.media/site/942/files/2020/04/RS37761_GettyImages-506514876.jpg?w=980&q=75",
-  average_rating: "4.2",
-  rating_number: "420",
-};
-const BarberShopImage = () => {
+const BarberShopImage = (props) => {
   return (
     <Image
       style={{
@@ -40,13 +37,13 @@ const BarberShopImage = () => {
         borderBottomRightRadius: 20,
       }}
       source={{
-        uri: barber.image,
+        uri: props.image,
       }}
     />
   );
 };
 
-const BarberShopInfo = () => {
+const BarberShopInfo = (props) => {
   return (
     <View
       style={{
@@ -57,19 +54,17 @@ const BarberShopInfo = () => {
       }}
     >
       <View>
-        <Text style={{ fontSize: 24 }}>{barber.title}</Text>
+        <Text style={{ fontSize: 24 }}>{props.name}</Text>
         <Text style={{ fontSize: 14, width: "70%", color: "gray" }}>
-          {barber.description}
+          {props.addresse}
         </Text>
       </View>
 
       <View style={{ alignItems: "center", marginLeft: -28 }}>
         <Text style={{ fontSize: 24, marginLeft: -20, fontWeight: "bold" }}>
-          ⭐ {barber.average_rating}
+          ⭐ {props.rating}
         </Text>
-        <Text style={{ fontSize: 12, color: "gray" }}>
-          {barber.rating_number} Vote
-        </Text>
+        <Text style={{ fontSize: 12, color: "gray" }}>{props.review} Vote</Text>
       </View>
     </View>
   );

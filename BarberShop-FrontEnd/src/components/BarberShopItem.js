@@ -1,45 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-const localBarbershops = [
-  {
-    name: "Beachside Bar",
-    image_url:
-      "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
-    categories: ["Cafe", "Bar"],
-    price: "$$",
-    reviews: 1244,
-    rating: 4.5,
-  },
-  {
-    name: "Benihana",
-    image_url:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    categories: ["Cafe", "Bar"],
-    price: "$$",
-    reviews: 1244,
-    rating: 3.7,
-  },
-  {
-    name: "India's Grill",
-    image_url:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    categories: ["Indian", "Bar"],
-    price: "$$",
-    reviews: 700,
-    rating: 4.9,
-  },
-];
-export default () => {
+import { localBarbershops } from "../Services/Barbers";
+import { FavoriteBarberShops } from "../Services/FavoriteRestaurant";
+export let Favorites = [];
+export default ({ navigation }) => {
   return (
     <>
       {localBarbershops.map((barbershop, index) => (
-        <TouchableOpacity activeOpacity={1} key={index}>
+        <TouchableOpacity
+          activeOpacity={1}
+          key={index}
+          onPress={() =>
+            navigation.navigate("BarberShopDetails", {
+              name: barbershop.name,
+              image: barbershop.image_url,
+              addresse: barbershop.addresse,
+              rating: barbershop.rating,
+              review: barbershop.reviews,
+              user_reviews: barbershop.user_reviews,
+              barbers: barbershop.barbers,
+            })
+          }
+        >
           <View
             style={{ marginTop: 10, padding: 15, backgroundColor: "white" }}
           >
-            <BarberShopImage image={barbershop.image_url} />
+            <BarberShopImage image={barbershop.image_url} barber={barbershop} />
             <BarberShopInfo
               BarberShopname={barbershop.name}
               rating={barbershop.rating}
@@ -52,6 +39,7 @@ export default () => {
 };
 
 const BarberShopImage = (props) => {
+  const [heartIcon, setHeartIcon] = useState("heart-outline");
   return (
     <>
       <Image
@@ -60,17 +48,31 @@ const BarberShopImage = (props) => {
         }}
         style={{ width: "100%", height: 180 }}
       />
-      <TouchableOpacity style={{ position: "absolute", right: 30, top: 25 }}>
+      <TouchableOpacity
+        style={{ position: "absolute", right: 30, top: 25 }}
+        onPress={(value) => {
+          if (heartIcon === "heart") {
+            setHeartIcon("heart-outline");
+            Favorites = Favorites.filter(
+              (barber) => barber.name != props.barber.name
+            );
+          } else {
+            setHeartIcon("heart");
+            Favorites.push(props.barber);
+          }
+        }}
+      >
         <MaterialCommunityIcons
-          name="heart-outline"
+          name={heartIcon}
           size={26}
-          backgroundColor="white"
+          selectionColor="white"
+          backgroundColor="black"
+          color="white"
         ></MaterialCommunityIcons>
       </TouchableOpacity>
     </>
   );
 };
-
 const BarberShopInfo = (props) => {
   return (
     <View

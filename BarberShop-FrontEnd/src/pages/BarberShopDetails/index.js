@@ -11,17 +11,17 @@ import About from "../../components/BarberShopDetails/About";
 import Reviews from "../../components/BarberShopDetails/Reviews";
 import { ChooseButton } from "../../components/BarberShopDetails/ChooseButton";
 
-export default () => {
+export default ({ route, navigation }) => {
   return (
-    <View>
+    <ScrollView style={{ alignSelf: "stretch" }}>
       <StatusBar
         hidden={true}
         barStyle="dark-content"
         backgroundColor="white"
       ></StatusBar>
-      <About />
-      <Reviews />
-      <ChooseButton />
-    </View>
+      <About route={route} />
+      <Reviews route={route} />
+      <ChooseButton route={route} />
+    </ScrollView>
   );
 };
