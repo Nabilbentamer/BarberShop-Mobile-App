@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 const MainStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="SplashScreen"
+      initialRouteName="Test"
       screenOptions={{
         headerShown: false,
       }}
