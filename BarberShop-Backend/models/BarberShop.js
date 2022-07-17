@@ -40,6 +40,17 @@ const BarberShopShema = new Schema({
       ref: "barber",
     },
   ],
+  reviews: [
+    {
+      author_name: String,
+      rating: String,
+      relative_time_description: String,
+      test: String,
+    },
+  ],
+  user_total_reviews: {
+    type: "String",
+  },
   average_review: {
     type: Number,
     default: 0,
